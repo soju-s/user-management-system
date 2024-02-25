@@ -1,0 +1,67 @@
+.parentDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(65, 65, 197);
+}
+.middleChild {
+  background-color: white;
+  /* height: 480px; */
+  height: 60vh;
+  width: 30vw;
+  /* width: 450px; */
+}
+.loginText {
+  text-align: center;
+}
+.btnAndAnchor {
+  display: flex;
+  justify-content: space-between;
+}
+.signupLink {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.03);
+  /* height: 5vh; */
+}
+.decoration {
+  text-decoration: none;
+}
+.decoration:hover {
+  text-decoration: underline;
+}
+.headings {
+  height: 7vh;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.formss {
+  height: 35vh;
+}
+.invalidMsg {
+  text-align: center;
+}
+.passwordAndEye {
+  display: flex;
+  align-items: center;
+}
+.fa-eye:hover {
+  cursor: pointer;
+}
+
+/* media query */
+@media (max-width: 768px) {
+  .middleChild {
+    width: 90vw;
+    height: 90vh;
+  }
+  .signupLink {
+    margin-top: 1vh;
+  }
+}
+@media (min-width: 769px) {
+  .middleChild {
+    width: 30vw;
+    height: 62vh;
+  }
+}

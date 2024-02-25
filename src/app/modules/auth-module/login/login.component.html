@@ -1,0 +1,77 @@
+<div class="parentDiv">
+
+  <div class=" middleChild form-control">
+    <div class="headings">
+      <h1 class="loginText mt-3">Login</h1>
+    </div>
+
+    <form class="formss" [formGroup]="inputData" (ngSubmit)="submitBtnCLicked()">
+      <div class="mb-2 mt-5">
+        <label for="emailInput" class="form-label">Email</label>
+        <input autocomplete="email" name="email" id="emailInput" formControlName="email" type="email"
+          class="form-control" placeholder="Enter Email address" />
+      </div>
+      <div *ngIf="
+          inputData.get('email')?.errors && inputData.get('email')?.touched
+        " class="text-danger">
+        Invalid Email
+      </div>
+      <div class="mb-2">
+        <label for="passwordInput" class="form-label mt-3">Password</label>
+        <div class="passwordAndEye ">
+
+          <input id="passwordInput" #passwordInputVariable name="password" formControlName="password" type="password" class="form-control"
+            placeholder="Enter Password" /><i (click)="passwordShowBtnClicked(passwordInputVariable)" class="fa-regular fa-eye "></i>
+
+        </div>
+      </div>
+      <div *ngIf="
+          inputData.get('password')?.errors &&
+          inputData.get('password')?.touched 
+        " class="text-danger">
+        Invalid Password
+      </div>
+
+      <div class="btnAndAnchor mt-4">
+        <div><a class="decoration" href="">forgot password?</a></div>
+        <button id="loginButton" type="submit" mat-raised-button color="primary">Login <i *ngIf="!loginBtnCLicked"
+            class="fa-solid fa-user-lock"></i> <i *ngIf="loginBtnCLicked" class="fa-solid fa-spinner fa-spin"></i>
+        </button>
+      </div>
+    </form>
+
+    <!-- invalid username or password -->
+
+    <div *ngIf="invalidUsernameorPassword" class="text-danger invalidMsg">
+      Invalid username or password
+    </div>
+
+    <!-- invalid user -->
+
+    <div *ngIf="userNotFoundError" class="text-danger invalidMsg">
+      User not found
+    </div>
+
+    <!-- fill field  -->
+
+    <div *ngIf="fillFieldMessage" class="text-danger invalidMsg">
+      Please all fill fields
+    </div>
+
+    <!-- error message -->
+
+    <div *ngIf="errorMessage" class="text-danger invalidMsg">
+      Error has occured
+    </div>
+
+    <!-- server busy or network error -->
+    <div *ngIf="serverBusyError" class="text-danger invalidMsg">
+      Network busy or no internet please try again later!
+    </div>
+
+    <div class="signupLink mt-4">
+      <a class="decoration" routerLink="register">Need an account? Sign up!</a>
+    </div>
+  </div>
+
+</div>

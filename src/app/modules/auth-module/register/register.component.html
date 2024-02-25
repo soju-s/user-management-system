@@ -1,0 +1,69 @@
+<div>
+    <!-- <div class="childs"></div> -->
+    <div class="formChild">
+       <form [formGroup]="registerData" (ngSubmit)="registerClicked()" class="form-control formsGroups">
+
+       <div class="heading">
+          <h1 class="headingText">Create Account</h1>
+  
+       </div>
+        <!-- first name -->
+            <mat-form-field class="fields">
+                <mat-label>Enter First Name</mat-label>
+                <input formControlName="firstName" type="text" matInput>
+              </mat-form-field>
+
+              <!-- last name -->
+              <mat-form-field class="fields">
+                <mat-label>Enter Last Name</mat-label>
+                <input formControlName="lastName" type="text" matInput>
+              </mat-form-field>
+
+              <!-- email -->
+              <div>
+                <mat-form-field class="email-full-width">
+                    <mat-label>Enter Email</mat-label>
+                    <input formControlName="email" type="email" placeholder="Ex. pat@example.com" matInput>
+                  </mat-form-field>
+              </div>
+
+              <!-- password -->
+              <mat-form-field class="fields">
+                <mat-label>Enter Password</mat-label>
+                <input formControlName="password" type="password" matInput>
+              </mat-form-field>
+
+              <!-- confirm password -->
+              <mat-form-field class="fields">
+                <mat-label>Confirm Password</mat-label>
+                <input formControlName="confirmPassword" type="password" matInput>
+              </mat-form-field>
+
+              <!-- role -->
+           <div>
+                  <mat-form-field class="email-full-width">
+                    <mat-label>Select Role</mat-label>
+                    <mat-select formControlName="role">
+                      <mat-option value="admin">Admin</mat-option>
+                      <mat-option value="supervisor">Supervisor</mat-option>
+                      <mat-option value="agent">Agent</mat-option>
+                      <mat-option value="qc">Qc</mat-option>
+                      <mat-option value="qa">Qa</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+           </div >
+
+           <!-- button -->
+        <div class="Createbutton">
+            <div class="d-grid ">
+                 <button class="mb-3 mt-4" type="submit" mat-raised-button color="primary">Create Account</button>
+                 
+            </div>
+        </div>
+
+          <!-- login link -->
+          <div class="haveAnAccount"> <a class="decoration" routerLink="" href="auth/login">Have an account? Go to login</a></div>
+       </form>
+    </div>
+    <!-- <div class="childs"></div> -->
+</div>

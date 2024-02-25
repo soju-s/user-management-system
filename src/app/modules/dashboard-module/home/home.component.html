@@ -1,0 +1,13 @@
+<app-header (toogle)="toogleFunction()" ></app-header>
+
+
+<mat-drawer-container class="example-container">
+    <mat-drawer class="sidebarBody" mode="side" [opened]="sideBar">
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+
+    <app-table></app-table>
+    
+    </mat-drawer-content>
+  </mat-drawer-container>
