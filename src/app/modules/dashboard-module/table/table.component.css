@@ -3,4 +3,20 @@
    justify-content: center;
    align-items: center;
    height:  91.8vh;
+   
+}
+td{
+   text-align: center;
+}
+th{
+   text-align: center;
+}
+.fa-solid {
+   font-size:larger;
+}
+.fa-solid:hover{
+   cursor: pointer;
+}
+.form-control{
+ margin-top: 15vh;  
 }

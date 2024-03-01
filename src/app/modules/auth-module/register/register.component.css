@@ -7,6 +7,12 @@
   background-color: rgb(65, 65, 197);
 }
 
+.text-success{
+  text-align: center;
+}
+.text-danger{
+  text-align: center;
+}
 .formsGroups {
   width: 50vw;
   text-align: center;
@@ -42,7 +48,7 @@
   background-color: rgba(0, 0, 0, 0.03);
 }
 .Createbutton {
-  width: 45.2vw;
+  width: 48vw;
   /* margin-left: 17px; */
 }
 
@@ -61,10 +67,14 @@
     width: 80vw;
   }
   .Createbutton {
-    width: 82vw;
+    width: 85vw;
   }
 }
 @media (min-width: 1024px) {
+  .Createbutton {
+    width: 48vw;
+    /* margin-left: 17px; */
+  }
   /* .formsGroups{
         width: 90vw;
         height: 90vh;

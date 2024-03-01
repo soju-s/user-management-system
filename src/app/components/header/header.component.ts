@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonService } from '../../services/commonService/common.service';
 import { Router } from '@angular/router';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,9 @@ export class HeaderComponent {
 
 
 
-  // error message
-  errorMessage:boolean=false
 
-  constructor(private dataToSidebarservice : CommonService,private router:Router){}
+
+  constructor(private router:Router,public dialog: MatDialog){}
 
   // Function to open or close sidebar
 
@@ -29,17 +29,14 @@ export class HeaderComponent {
 
   // function to logout
 
-  logoutBtnClicked(){
-
-    if(localStorage.getItem("token") && localStorage.getItem("role")){
-      localStorage.removeItem("token");
-      localStorage.removeItem('role',)
-      this.router.navigate([''])
-    }
-else{
-this.errorMessage=true
-}
+  
+  openDialog() {
+   
     
+    const dialogRef = this.dialog.open(ConfirmationComponent,{data:{statuss:"logout"}} );
 
+    dialogRef.afterClosed().subscribe(result => {
+     
+    });
   }
 }

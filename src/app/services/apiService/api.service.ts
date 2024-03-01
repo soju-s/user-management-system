@@ -11,8 +11,10 @@ export class ApiService {
   
   constructor(private api:HttpClient){}
 
-  post(data:any,apiLink:any){
-    return this.api.post(environment.baseUrl+apiLink,data).pipe(
+
+
+  post(data:any,apiLink:any,header?:any){
+    return this.api.post(environment.baseUrl+apiLink,data,{headers:header}).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
           // Client-side error
@@ -27,5 +29,21 @@ export class ApiService {
     
   }
 
+  // to list all user
+
+  get(apiLink:any,header:any){
+    return this.api.get(environment.baseUrl+apiLink,{headers:header});
+  }
+
+  // delete user
+
+  delete(id:any,apiLink:any,header:any){
+    return this.api.delete(environment.baseUrl+apiLink+id,{headers:header})
+  }
+
+
+  put(apiLink:any,data:any,header:any){
+    return this.api.put(environment.baseUrl+apiLink,data,{headers:header})
+  }
 
 }

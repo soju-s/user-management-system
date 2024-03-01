@@ -3,3 +3,17 @@
     width: 15vw;
    
 }
+.btn{
+    margin-top: 5vh;
+}
+.parentBtn{
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+.childBtn:hover{
+    cursor: pointer;
+    color: white;
+}
+.childBtn{
+    margin-top: 6vh;
+}

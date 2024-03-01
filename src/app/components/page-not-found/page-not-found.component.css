@@ -1,0 +1,27 @@
+.pageNotFoundimage{
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 0;
+}
+.imageDiv{
+    width: 27vw;
+}
+body{
+    box-sizing: border-box;
+}
+.divChild{
+    text-align: center;
+}
+.returnLInk{
+    text-decoration: underline;
+    font-size:larger;
+}
+.returnLInk:hover{
+    cursor: pointer;
+}
+.texts{
+    margin-top: 1rem
+}

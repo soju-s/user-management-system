@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -19,13 +20,25 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
     MatButtonModule, MatDividerModule, MatIconModule, 
     MatFormFieldModule, MatInputModule, MatSelectModule,
     MatSidenavModule,
-    MatTableModule, MatPaginatorModule
-    
+    MatTableModule, MatPaginatorModule,
+    MatDialogActions,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogClose,
+    MatPaginator,
+   
   ],
   exports:[MatButtonModule,
     MatButtonModule, MatDividerModule, MatIconModule, 
     MatFormFieldModule, MatInputModule, MatSelectModule,
   MatSidenavModule,
-  MatTableModule, MatPaginatorModule]
+  MatTableModule, MatPaginatorModule,
+  MatDialogActions,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogClose,
+    MatPaginator,
+  ]
+    
 })
 export class MaterialModuleModule { }

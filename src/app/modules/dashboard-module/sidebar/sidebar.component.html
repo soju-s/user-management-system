@@ -1,2 +1,13 @@
 <div class="sidebarBody">
+  <!-- create account button -->
+  <div class="parentBtn">
+    <div class="childBtn">
+      <h3 [routerLink]="['/dashboard']"><i class="fa-solid fa-gauge me-2"></i>Dashboard</h3>
+    </div>
+    <div class="childBtn">
+      <h3 (click)="openDialog()" mat-raised-button color="danger">
+        <i class="fa-solid fa-user-plus me-2"></i> Create Account
+      </h3>
+    </div>
+  </div>
 </div>

@@ -1,11 +1,12 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from './auth.service';
 import { inject } from '@angular/core';
 
 
 
 export const authGuardGuard: CanActivateFn = (route, state) => {
 
+
+  if(typeof localStorage !='undefined'){
     const token=localStorage.getItem("token")
     const router =inject(Router)
 
@@ -16,6 +17,9 @@ return true
       router.navigate([""])
       return false
     }
+  }
+return false
+  
 
 
 };

@@ -33,7 +33,7 @@
       </div>
 
       <div class="btnAndAnchor mt-4">
-        <div><a class="decoration" href="">forgot password?</a></div>
+        <div><a class="decoration" [routerLink]="['passwordReset']">forgot password?</a></div>
         <button id="loginButton" type="submit" mat-raised-button color="primary">Login <i *ngIf="!loginBtnCLicked"
             class="fa-solid fa-user-lock"></i> <i *ngIf="loginBtnCLicked" class="fa-solid fa-spinner fa-spin"></i>
         </button>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="signupLink mt-4">
-      <a class="decoration" routerLink="register">Need an account? Sign up!</a>
+      <a class="decoration" [routerLink]="['/register']">Need an account? Sign up!</a>
     </div>
   </div>
 

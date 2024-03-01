@@ -28,35 +28,58 @@
               </div>
 
               <!-- password -->
-              <mat-form-field class="fields">
-                <mat-label>Enter Password</mat-label>
-                <input formControlName="password" type="password" matInput>
-              </mat-form-field>
+              <mat-form-field class="fields" appearance="fill">
+              <mat-label>Enter Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="toggleVisibility()">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
 
               <!-- confirm password -->
-              <mat-form-field class="fields">
+              <mat-form-field class="fields" appearance="fill">
                 <mat-label>Confirm Password</mat-label>
-                <input formControlName="confirmPassword" type="password" matInput>
+                <input matInput [type]="confirmHide ? 'password' : 'text'" formControlName="confirmPassword">
+                <button mat-icon-button matSuffix (click)="toggleVisibilityConfirm()">
+                  <mat-icon>{{ confirmHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
               </mat-form-field>
+ 
+              <!-- password missmatch -->
 
-              <!-- role -->
-           <div>
-                  <mat-form-field class="email-full-width">
-                    <mat-label>Select Role</mat-label>
-                    <mat-select formControlName="role">
-                      <mat-option value="admin">Admin</mat-option>
-                      <mat-option value="supervisor">Supervisor</mat-option>
-                      <mat-option value="agent">Agent</mat-option>
-                      <mat-option value="qc">Qc</mat-option>
-                      <mat-option value="qa">Qa</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-           </div >
+              <div class="text-danger" *ngIf="registerData.hasError('passwordMismatch') && registerData.get('confirmPassword')?.touched">
+                Passwords do not match.
+              </div>
+
+              <!-- success message -->
+
+              <div *ngIf="registerSuccessMessage" class="text-success ">
+                Registration Successfull 
+              </div>
+
+              <!-- failed message -->
+          
+             
+              <div *ngIf="registrationFailedMessage" class="text-danger">
+                Registration Failed
+              </div>
+
+              <!-- network error -->
+
+              <div class="text-danger" *ngIf="networkError">
+              Please check your connection and try again.
+              </div>
+
+              <!-- user already exists -->
+
+              <div class="text-danger" *ngIf="userAlreadyExist">
+                Email already exists Please use a different email address.
+                </div>
 
            <!-- button -->
         <div class="Createbutton">
             <div class="d-grid ">
-                 <button class="mb-3 mt-4" type="submit" mat-raised-button color="primary">Create Account</button>
+                 <button [disabled]="!registerData.valid || buttonDisable" class="mb-3 mt-4" type="submit" mat-raised-button color="primary">Create Account</button>
                  
             </div>
         </div>

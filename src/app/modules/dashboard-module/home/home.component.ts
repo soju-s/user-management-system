@@ -7,23 +7,26 @@ import { AuthService } from '../../../services/authService/auth.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService:AuthService) {}
 
   // hide or show sidebar
 
   sideBar: boolean = true;
 
   ngOnInit(): void {
+
+   // Start token refresh process when the application initializes
+   this.authService.startTokenRefresh();
     // remove token when user click back button
 
-    window.onpopstate = () => {
-      this.authService.removeToken();
-    };
+    // window.onpopstate = () => {
+    //   this.authService.removeToken();
+    // };
     // remove token when user closes window
 
-    window.onbeforeunload = () => {
-      this.authService.removeToken();
-    };
+    // window.onbeforeunload = () => {
+    //   this.authService.removeToken();
+    // };
 
     // checking is token is there in localstorage
     if (!localStorage.getItem('token')) {
@@ -31,7 +34,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  
+
   toogleFunction() {
     this.sideBar = !this.sideBar;
   }
+
+
 }

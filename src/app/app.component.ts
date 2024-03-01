@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from '../environment/environment';  
+import { AuthService } from './services/authService/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,7 @@ import { environment } from '../environment/environment';
 })
 export class AppComponent {
   title = 'ums-Frontend';
+
+
+
 }

@@ -9,10 +9,8 @@ export class CommonService {
   constructor() { }
 
 
-  // data from header to sidebar
-  dataFromHeadertoSidebar:boolean=false
+  // behaviour subject for adding data bto table from create account
 
-  // behaviour subject
-  headerAndSidebarSubject = new BehaviorSubject(false)
+  behaviourTableData=new BehaviorSubject([])
 
 }

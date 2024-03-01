@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/apiService/api.service';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private serv: ApiService,
@@ -49,6 +51,18 @@ export class LoginComponent {
     ],
   });
 
+  ngOnInit(): void {
+  
+
+  }
+
+  // function to encryt data
+   encryptData(data: any): string {
+
+    const encryptionKey = 'yourEncryptionKey';
+    return CryptoJS.AES.encrypt(JSON.stringify(data), encryptionKey).toString();
+  }
+
   // submit button clicked function
 
   submitBtnCLicked() {
@@ -57,13 +71,26 @@ export class LoginComponent {
       this.loginBtnCLicked = true;
       this.serv.post(this.inputData.value, loginApi).subscribe(
         (result: any) => {
-          if (result.data.user.accessToken != '' && result.data.user.role != ''
+          if (
+            result.data.user.accessToken != '' &&
+            result.data.user.role != ''
           ) {
+
+            // encrypting role
+
+            const sensitiveData={role:result.data.user.role};
+             const encryptedData = this.encryptData(sensitiveData);
+            localStorage.setItem('role', encryptedData);
             localStorage.setItem('token', result.data.user.accessToken);
-            localStorage.setItem('role', result.data.user.role);
+            localStorage.setItem('refreshToken', result.data.user.refreshToken);
+            
             if (result.data.user.role == 'admin') {
-              this.router.navigate(['admin/dashboard']);
+              this.router.navigate(['dashboard']);
               this.loginBtnCLicked = false;
+            }
+            else if(result.data.user.role=='agent'){
+              this.router.navigate(['dashboard/user'])
+              this.loginBtnCLicked=false
             }
           } else {
             this.errorMessage = true;

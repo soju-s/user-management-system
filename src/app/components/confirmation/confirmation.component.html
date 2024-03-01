@@ -1,0 +1,12 @@
+<!-- log out confirmatiom -->
+<div *ngIf="divShow=='logout'" class="container">
+    <div>
+        <h2>
+            Do you want to Logout
+        </h2>
+        <div >
+            <button (click)="noClicked()" class="btn btn-warning">No</button>
+            <button (click)="logOutClicked()" class="btn btn-danger ms-5">Yes</button>
+        </div>
+    </div>
+</div>
