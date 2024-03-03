@@ -1,8 +1,13 @@
-.container{
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50vw;
-    height: 50vh;
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+}
+.text-danger {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  font-size: larger;
 }

@@ -1,79 +1,100 @@
-
 <div style="width: 50vw;">
-  
-      <form [formGroup]="registerData" (ngSubmit)="registerClicked()" class="form-control formsGroups">
-  
-          <div class="heading">
-             <h1 class="headingText">{{buttonStatusChange}} Account</h1>
-     
-          </div>
-           <!-- first name -->
-               <mat-form-field class="fields">
-                   <mat-label>Enter First Name</mat-label>
-                   <input  formControlName="firstName" type="text" matInput>
-                 </mat-form-field>
-   
-                 <!-- last name -->
-                 <mat-form-field class="fields">
-                   <mat-label>Enter Last Name</mat-label>
-                   <input  formControlName="lastName" type="text" matInput>
-                 </mat-form-field>
-   
-                 <!-- email -->
-                 <div>
-                   <mat-form-field class="email-full-width">
-                       <mat-label>Enter Email</mat-label>
-                       <input formControlName="email" type="email" placeholder="Ex. pat@example.com" matInput>
-                     </mat-form-field>
-                 </div>
-   
-                 <!-- password -->
-               
 
-                 <mat-form-field class="fields" appearance="fill">
-                  <mat-label>Enter Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                  <button mat-icon-button matSuffix (click)="toggleVisibility()">
-                    <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-                  </button>
-                </mat-form-field>
-   
-               <!-- confirm password -->
+  <form [formGroup]="registerData" (ngSubmit)="buttonClicked()" class="form-control formsGroups">
 
-                 <mat-form-field class="fields" appearance="fill">
-                  <mat-label>Confirm Password</mat-label>
-                  <input matInput [type]="confirmHide ? 'password' : 'text'" formControlName="confirmPassword">
-                  <button mat-icon-button matSuffix (click)="toggleVisibilityConfirm()">
-                    <mat-icon>{{ confirmHide ? 'visibility_off' : 'visibility' }}</mat-icon>
-                  </button>
-                </mat-form-field>
-   
-                 <!-- role -->
-              <div>
-                     <mat-form-field class="email-full-width">
-                       <mat-label>Select Role</mat-label>
-                       <mat-select formControlName="role">
-                         <mat-option value="admin">Admin</mat-option>
-                         <mat-option value="supervisor">Supervisor</mat-option>
-                         <mat-option value="agent">Agent</mat-option>
-                         <mat-option value="qc">Qc</mat-option>
-                         <mat-option value="qa">Qa</mat-option>
-                       </mat-select>
-                     </mat-form-field>
-              </div >
+    <div class="heading">
+      <h1 class="headingText">{{buttonStatusChange}} Account</h1>
 
-             
-              
+    </div>
+    <!-- first name -->
+    <mat-form-field class="fields">
+      <mat-label>Enter First Name</mat-label>
+      <input formControlName="firstName" type="text" matInput>
+    </mat-form-field>
 
-                <!-- password missmatch -->
+    <!-- last name -->
+    <mat-form-field class="fields">
+      <mat-label>Enter Last Name</mat-label>
+      <input formControlName="lastName" type="text" matInput>
+    </mat-form-field>
 
-                <div class="text-danger" *ngIf="registerData.hasError('passwordMismatch') && registerData.get('confirmPassword')?.touched">
-                  Passwords do not match.
-                </div>
-  
-  <mat-dialog-actions align="center">
-    <button color="warn"  mat-raised-button mat-dialog-close>Cancel</button>
-    <button [disabled]="!registerData.valid" type="submit" color="primary"  mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>{{buttonStatusChange}}</button>
-  </mat-dialog-actions>
-</form>
+    <!-- email -->
+    <div>
+      <mat-form-field class="email-full-width">
+        <mat-label>Enter Email</mat-label>
+        <input formControlName="email" type="email" placeholder="Ex. pat@example.com" matInput>
+      </mat-form-field>
+    </div>
+
+    <!-- password -->
+
+
+    <mat-form-field class="fields" appearance="fill">
+      <mat-label>Enter Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button type="button" mat-icon-button matSuffix (click)="toggleVisibility()">
+        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- confirm password -->
+
+    <mat-form-field class="fields" appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput [type]="confirmHide ? 'password' : 'text'" formControlName="confirmPassword">
+      <button type="button" mat-icon-button matSuffix (click)="toggleVisibilityConfirm()">
+        <mat-icon>{{ confirmHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- role -->
+    <div>
+      <mat-form-field class="email-full-width">
+        <mat-label>Select Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="supervisor">Supervisor</mat-option>
+          <mat-option value="agent">Agent</mat-option>
+          <mat-option value="qc">Qc</mat-option>
+          <mat-option value="qa">Qa</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- password missmatch -->
+
+    <div class="text-danger"
+      *ngIf="registerData.hasError('passwordMismatch') && registerData.get('confirmPassword')?.touched">
+      Passwords do not match.
+    </div>
+
+    <!-- error occured -->
+    <div class="text-danger" *ngIf="errorOccured">
+      Error occured
+    </div>
+
+    <!-- account already exist -->
+    <div class="text-danger" *ngIf="accountAlreadyExist">
+      Email already registered
+    </div>
+
+
+
+    <!-- success message for registration-->
+
+    <div class="text-success" *ngIf="registrationSuccessful">
+      Registration Successfull
+    </div>
+
+    <!-- edit success full -->
+    <div class="text-success" *ngIf="updatedSuccessful">
+      Updated Successfull
+    </div>
+
+    <mat-dialog-actions align="center">
+      <button color="warn" mat-raised-button mat-dialog-close>Cancel</button>
+      <button [disabled]="buttonDIsable" type="submit" color="primary" mat-raised-button
+        cdkFocusInitial>{{buttonStatusChange}}<i *ngIf="spinnerVisible" class="fa-solid fa-spinner fa-spin"></i></button>
+    </mat-dialog-actions>
+  </form>
 </div>

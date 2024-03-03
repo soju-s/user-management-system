@@ -8,10 +8,15 @@
 }
 .middleChild {
   background-color: white;
-  /* height: 480px; */
+
   height: 60vh;
   width: 35vw;
-  /* width: 450px; */
+  
+}
+.signupLink{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .loginText {
   text-align: center;
@@ -23,7 +28,7 @@
 .signupLink {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.03);
-  /* height: 5vh; */
+  
 }
 .decoration {
   text-decoration: none;
@@ -33,42 +38,67 @@
 }
 .headings {
   height: 7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.03);
 }
 .formss {
-  height: 42vh;
+  margin-top: 5vh;
 }
 .invalidMsg {
   text-align: center;
 }
-.passwordAndEye {
-  display: flex;
-  align-items: center;
-}
-.fa-eye:hover {
-  cursor: pointer;
+
+
+.field {
+  width: 100%;
+  margin-top: 1vh;
 }
 
 /* media query */
+
+
 @media (max-width: 768px) {
   .middleChild {
     width: 90vw;
     height: 90vh;
   }
+  .field {
+    margin-top: 2vh;
+  }
   .signupLink {
-    margin-top: 1vh;
+    margin-top: 10vh;
+    height:5vh
   }
 }
-@media(min-width:769px){
-  .middleChild{
+@media (min-width: 769px) {
+  .middleChild {
     width: 80vw;
     height: 80vh;
   }
-
+  .signupLink {
+    margin-top: 5vh;
+    height:5vh
+  }
 }
 @media (min-width: 1024px) {
   .middleChild {
     width: 35vw;
-    height: 75vh;
+    height: 60vh;
+  }
+  .signupLink {
+    margin-top: 5vh;
+    height:5vh
+  }
+}
+@media (min-width: 1200px) {
+  .middleChild {
+    width: 30vw;
+    height: 55vh;
+  }
+  .signupLink {
+    margin-top: 5vh;
+    height:5vh
   }
 }

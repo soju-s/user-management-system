@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/apiService/api.service';
 import { Router } from '@angular/router';
-import * as CryptoJS from 'crypto-js';
+import { CommonService } from '../../../services/commonService/common.service';
 
 
 @Component({
@@ -10,21 +10,27 @@ import * as CryptoJS from 'crypto-js';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private serv: ApiService,
-    private router: Router
+    private router: Router,
+    private commonServ:CommonService
   ) {}
 
+
+  // to disable button
+  buttonDIsable:boolean=false
+
+   // to hide and show password 
+   hide = true;
+  
   // server busy error
   serverBusyError: boolean = false;
 
   // error message
   errorMessage: boolean = false;
 
-  // fill field message
-  fillFieldMessage: boolean = false;
 
   // login button clicked
   loginBtnCLicked: boolean = false;
@@ -51,23 +57,18 @@ export class LoginComponent implements OnInit {
     ],
   });
 
-  ngOnInit(): void {
-  
+     // hide password function
 
-  }
-
-  // function to encryt data
-   encryptData(data: any): string {
-
-    const encryptionKey = 'yourEncryptionKey';
-    return CryptoJS.AES.encrypt(JSON.stringify(data), encryptionKey).toString();
-  }
+    toggleVisibility(): void {
+      this.hide = !this.hide;
+    }
 
   // submit button clicked function
 
   submitBtnCLicked() {
     let loginApi = '/auth/login';
     if (this.inputData.valid) {
+      this.buttonDIsable=true
       this.loginBtnCLicked = true;
       this.serv.post(this.inputData.value, loginApi).subscribe(
         (result: any) => {
@@ -79,12 +80,12 @@ export class LoginComponent implements OnInit {
             // encrypting role
 
             const sensitiveData={role:result.data.user.role};
-             const encryptedData = this.encryptData(sensitiveData);
+             const encryptedData = this.commonServ.encryptData(sensitiveData);
             localStorage.setItem('role', encryptedData);
             localStorage.setItem('token', result.data.user.accessToken);
             localStorage.setItem('refreshToken', result.data.user.refreshToken);
             
-            if (result.data.user.role == 'admin') {
+            if (result.data.user.role == 'admin'|| result.data.user.role=="supervisor") {
               this.router.navigate(['dashboard']);
               this.loginBtnCLicked = false;
             }
@@ -93,47 +94,52 @@ export class LoginComponent implements OnInit {
               this.loginBtnCLicked=false
             }
           } else {
+            this.buttonDIsable=false
             this.errorMessage = true;
             this.loginBtnCLicked = false;
           }
         },
         (err: any) => {
+           this.buttonDIsable=false
+            // network wrror
           if (err.status == 0) {
             this.serverBusyError = true;
             this.loginBtnCLicked = false;
             setTimeout(() => {
               this.serverBusyError = false;
             }, 3000);
-          } else if (err.error.data.error.status == 401) {
+          }
+
+          // wrong password
+          
+          else if (err.error.data.error.status == 401) {
             this.invalidUsernameorPassword = true;
             this.loginBtnCLicked = false;
             setTimeout(() => {
               this.invalidUsernameorPassword = false;
-            }, 2000);
-          } else if (err.error.data.error.status == 404) {
+            }, 3000);
+          }
+          
+          // user not found
+
+          else if (err.error.data.error.status == 404) {
             this.userNotFoundError = true;
             this.loginBtnCLicked = false;
             setTimeout(() => {
               this.userNotFoundError = false;
-            }, 2000);
+            }, 3000);
+          }
+          else{
+            this.errorMessage=true
+
+            setTimeout(() => {
+              this.errorMessage=false
+            }, 3000);
           }
         }
       );
-    } else {
-      this.fillFieldMessage = true;
-      setTimeout(() => {
-        this.fillFieldMessage = false;
-      }, 2000);
-    }
+    } 
   }
 
-  // password show button clicked
 
-  passwordShowBtnClicked(passwordVar: any) {
-    if (passwordVar.type == 'password') {
-      passwordVar.type = 'text';
-    } else {
-      passwordVar.type = 'password';
-    }
-  }
 }

@@ -1,22 +1,22 @@
-.container{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height:  91.8vh;
-   
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 91.8vh;
 }
-td{
-   text-align: center;
+td {
+  text-align: center;
 }
-th{
-   text-align: center;
+th {
+  text-align: center;
+  vertical-align: bottom;
 }
 .fa-solid {
-   font-size:larger;
+  font-size: larger;
 }
-.fa-solid:hover{
-   cursor: pointer;
+.fa-solid:hover {
+  cursor: pointer;
 }
-.form-control{
- margin-top: 15vh;  
+.form-control {
+  margin-top: 15vh;
 }

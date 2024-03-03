@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { MainModuleModule } from './modules/main-module.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { SuccessfullComponent } from './components/successfull/successfull.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -16,7 +15,6 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    SuccessfullComponent,
     ConfirmationComponent,
   ],
   imports: [

@@ -7,7 +7,7 @@
 }
 .navbar {
   background-color: #343a40;
-  height: 10vh;
+  height: 8vh;
 }
 .usericon {
   margin-right: 110px;
@@ -18,12 +18,12 @@
   opacity: 1;
 }
 .navbar-toggler {
- background-color: white;
+  background-color: white;
 }
 /* media query */
 
-@media(max-width:991px){
-.navbar{
-  height: 10vh;
-}
+@media (max-width: 991px) {
+  .navbar {
+    height: 8vh;
+  }
 }

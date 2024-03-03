@@ -17,25 +17,10 @@ export class HomeComponent implements OnInit {
 
    // Start token refresh process when the application initializes
    this.authService.startTokenRefresh();
-    // remove token when user click back button
-
-    // window.onpopstate = () => {
-    //   this.authService.removeToken();
-    // };
-    // remove token when user closes window
-
-    // window.onbeforeunload = () => {
-    //   this.authService.removeToken();
-    // };
-
-    // checking is token is there in localstorage
-    if (!localStorage.getItem('token')) {
-      
-    }
+   
   }
 
-  
-
+  //  Toggle Side Bar Functionality
   toogleFunction() {
     this.sideBar = !this.sideBar;
   }

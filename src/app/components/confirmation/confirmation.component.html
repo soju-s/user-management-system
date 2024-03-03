@@ -6,7 +6,23 @@
         </h2>
         <div >
             <button (click)="noClicked()" class="btn btn-warning">No</button>
-            <button (click)="logOutClicked()" class="btn btn-danger ms-5">Yes</button>
+            <button (click)="yesClicked()" class="btn btn-danger ms-5">Yes</button>
+        </div>
+    </div>
+</div>
+
+<!-- delete confirmation  -->
+<div *ngIf="divShow=='delete'" class="container">
+    <div>
+        <h2>
+            Do you want to Delete account
+        </h2>
+        <div *ngIf="errorMessage" class="text-danger">
+            Error occured
+        </div>
+        <div >
+            <button (click)="noClicked()" class="btn btn-warning">No</button>
+            <button (click)="yesClicked()" class="btn btn-danger ms-5">Yes</button>
         </div>
     </div>
 </div>

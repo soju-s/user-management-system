@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/apiService/api.service';
 import { Router } from '@angular/router';
@@ -8,16 +8,12 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
     private router: Router
   ) {}
-
-  ngOnInit(): void {
-    
-  }
 
   // user already exist
   userAlreadyExist:boolean=false
@@ -30,23 +26,21 @@ export class RegisterComponent implements OnInit{
   confirmHide = true;
 
   // registration api link
-
   registerUrl = '/agents';
 
   // registraion succsess message
-
   registerSuccessMessage: boolean = false;
 
   // button disable
-
   buttonDisable: boolean = false;
 
   // registraion failed message
-
   registrationFailedMessage: boolean = false;
 
-  // hide password function
+  // spinner
+  spinnerVisible:boolean=false
 
+  // hide password function
   toggleVisibility(): void {
     this.hide = !this.hide;
   }
@@ -57,66 +51,54 @@ export class RegisterComponent implements OnInit{
   //  form builder
 
   registerData = this.fb.group(
-    {
-      firstName: ['', [Validators.required]],
+    { firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      password: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9]{8,30}$')],
-      ],
-      confirmPassword: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9]{8,30}$')],
-      ],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/),
-        ],
-      ],
+      password: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]{8,30}$')]],
+      confirmPassword: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]{8,30}$')]],
+      email: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)]]
     },
     {
-      validators: this.passwordMatchValidator,
-    }
-  );
+      validators: this.passwordMatchValidator
+    });
 
   // register button clicked function
 
   registerClicked() {
     if (this.registerData.valid) {
+      this.spinnerVisible=true
+      this.buttonDisable = true;
       delete this.registerData.value.confirmPassword;
-
-      this.api.post(this.registerData.value, this.registerUrl).subscribe(
-        (result: any) => {
+      this.api.post(this.registerData.value, this.registerUrl).subscribe((result: any) => {
+        this.spinnerVisible=false
           if (result.status == 'true') {
             this.registerSuccessMessage = true;
-
-            this.buttonDisable = true;
+           
 
             setTimeout(() => {
               this.router.navigate(['']);
-            }, 3000);
+            }, 2000);
           } else {
             this.registrationFailedMessage = true;
+            this.buttonDisable=false
+            this.spinnerVisible=false
 
             setTimeout(() => {
               this.registrationFailedMessage = false;
             }, 3000);
-          }
-        },
-        (err: any) => {
+          }},
+          (err: any) => {
+         this.buttonDisable=false
+         this.spinnerVisible=false
+            // account already exist
 
-        
-          if(err.status==409){
+            if(err.status==409){
+              this.userAlreadyExist=true
+              setTimeout(() => {
+                this.userAlreadyExist=false
+              }, 3000);
+            }
 
-this.userAlreadyExist=true
-
-setTimeout(() => {
-  this.userAlreadyExist=false
-}, 3000);
-
-          }
+            // network error
           
          else if (err.status == 0) {
             this.networkError = true;
@@ -124,7 +106,11 @@ setTimeout(() => {
             setTimeout(() => {
               this.networkError = false;
             }, 3000);
-          } else {
+          }
+          
+          // registration failed
+          
+          else {
             this.registrationFailedMessage = true;
 
             setTimeout(() => {
@@ -133,9 +119,7 @@ setTimeout(() => {
           }
         }
       );
-    } else {
-      this.buttonDisable = true;
-    }
+    } 
   }
 
   // custome validator for  password and confirm password

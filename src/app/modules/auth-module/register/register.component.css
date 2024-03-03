@@ -7,10 +7,10 @@
   background-color: rgb(65, 65, 197);
 }
 
-.text-success{
+.text-success {
   text-align: center;
 }
-.text-danger{
+.text-danger {
   text-align: center;
 }
 .formsGroups {
@@ -33,7 +33,6 @@
 }
 .heading {
   height: 11vh;
-  /* background-color:rgb(239, 250, 250); */
   background-color: rgba(0, 0, 0, 0.03);
   display: flex;
   justify-content: center;
@@ -49,7 +48,6 @@
 }
 .Createbutton {
   width: 48vw;
-  /* margin-left: 17px; */
 }
 
 /* media query */
@@ -73,14 +71,22 @@
 @media (min-width: 1024px) {
   .Createbutton {
     width: 48vw;
-    /* margin-left: 17px; */
   }
-  /* .formsGroups{
-        width: 90vw;
-        height: 90vh;
-    } */
-  /* .fields{
-        width: 40vw;
-
-    } */
+}
+@media (min-width: 1200px) {
+  .formsGroups {
+    width: 45vw;
+  }
+  .Createbutton {
+    width: 43.5vw;
+  }
+  .email-full-width {
+    width: 40vw;
+  }
+  .fields {
+    width: 20.5vw;
+  }
+  .haveAnAccount {
+    margin-bottom: 2vh;
+  }
 }

@@ -7,8 +7,7 @@ import { MaterialModuleModule } from '../material-module/material-module.module'
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -22,7 +21,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ReactiveFormsModule,
     MaterialModuleModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
+  
   ]
 })
 export class AuthModuleModule { }

@@ -1,62 +1,76 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/apiService/api.service';
+import { CommonService } from '../../services/commonService/common.service';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
   styleUrl: './confirmation.component.css'
 })
-export class ConfirmationComponent implements OnInit{
+export class ConfirmationComponent implements OnInit {
 
-  constructor(private router:Router,@Inject(MAT_DIALOG_DATA) public data : {statuss:any},public dialogRef:MatDialogRef<any>){}
+  // error message
+  errorMessage: boolean = false
 
-    // error message
-    errorMessage:boolean=false
+  // to show delete or logout div
+  divShow: any
 
-  //  storedEncryptedData = localStorage.getItem('encryptedData');
-  //  if (storedEncryptedData:any) {
-  //   const decryptedData = this.decryptData(storedEncryptedData);
-  //   console.log(decryptedData); 
-  // }
+   // api link to delete
+   apiDeleteLink = "/admin/users/"
 
-  // Function to decrypt data
-//  decryptData(encryptedData: string): any {
-//   const encryptionKey = 'yourEncryptionKey';
-//   const bytes = CryptoJS.AES.decrypt(encryptedData, encryptionKey);
-//   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-// }
+  constructor(private router: Router, @Inject(MAT_DIALOG_DATA) public data: { id?: any, statuss: any }, public dialogRef: MatDialogRef<any>, private api: ApiService, private common: CommonService) { }
 
-divShow:any
-
-
-ngOnInit(): void {
-  if(this.data.statuss=="logout"){
-    this.divShow="logout"
-  }
-}
-
-
-  logOutClicked(){
-
-    if(localStorage.getItem("token") && localStorage.getItem("role")){
-      localStorage.removeItem("token");
-      localStorage.removeItem('role',)
-      localStorage.removeItem('refreshToken')
-
-      
-
-      this.router.navigate([''])
-    
+  ngOnInit(): void {
+    if (this.data.statuss == "logout") {
+      this.divShow = "logout"
     }
-else{
-this.errorMessage=true
-}
-   
+    else if (this.data.statuss == "delete") {
+      this.divShow = "delete"
+    }
   }
 
 
-  noClicked(){
+  yesClicked() {
+
+// to logout
+
+    if (this.divShow === 'logout') {
+
+      localStorage.removeItem("token");
+      localStorage.removeItem('role');
+      localStorage.removeItem('refreshToken');
+      this.dialogRef.close();
+      this.router.navigate([''])
+    }
+
+    // to delete
+
+    else if (this.divShow == "delete") {
+       let token = localStorage.getItem("token");
+      if (token) {
+        let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        this.api.delete(this.data.id, this.apiDeleteLink, headers).subscribe((res: any) => {
+          if (res.status == "true") {
+            this.common.behaviourDelete.next(true)
+            this.dialogRef.close();
+          }
+          
+           },
+           (err:any)=>{
+            this.errorMessage=true
+           })
+      }
+      else{
+        this.errorMessage=true
+      }
+
+    }
+  }
+
+  noClicked() {
     this.dialogRef.close();
   }
 

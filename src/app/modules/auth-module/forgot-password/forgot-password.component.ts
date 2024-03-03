@@ -1,27 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
-export class ForgotPasswordComponent implements OnInit{
+export class ForgotPasswordComponent {
 
-  // invalid email eror message
-  invalidEMailMSg:boolean=false
+ 
+
+  constructor(private fb:FormBuilder){}
 
 
-  constructor(private fb:FormBuilder,private router:Router){}
-
-  ngOnInit(): void {
-    if(localStorage.getItem('token') && localStorage.getItem('role')=="admin"){
-
-      this.router.navigate(["/dashboard"]);
-
-    }
-  }
 
   formData=this.fb.group({
     email:["",[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)]]
@@ -33,11 +24,7 @@ export class ForgotPasswordComponent implements OnInit{
     
    }
    else{
-    this.invalidEMailMSg=true;
-
-    setTimeout(() => {
-      this.invalidEMailMSg=false
-    }, 2000);
+   
    }
 
   }

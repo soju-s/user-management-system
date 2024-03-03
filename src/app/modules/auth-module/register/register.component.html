@@ -1,92 +1,95 @@
 <div>
-    <!-- <div class="childs"></div> -->
-    <div class="formChild">
-       <form [formGroup]="registerData" (ngSubmit)="registerClicked()" class="form-control formsGroups">
+  <!-- <div class="childs"></div> -->
+  <div class="formChild">
+    <form [formGroup]="registerData" (ngSubmit)="registerClicked()" class="form-control formsGroups">
 
-       <div class="heading">
-          <h1 class="headingText">Create Account</h1>
-  
-       </div>
-        <!-- first name -->
-            <mat-form-field class="fields">
-                <mat-label>Enter First Name</mat-label>
-                <input formControlName="firstName" type="text" matInput>
-              </mat-form-field>
+      <div class="heading">
+        <h1 class="headingText">Create Account</h1>
 
-              <!-- last name -->
-              <mat-form-field class="fields">
-                <mat-label>Enter Last Name</mat-label>
-                <input formControlName="lastName" type="text" matInput>
-              </mat-form-field>
+      </div>
+      <!-- first name -->
+      <mat-form-field class="fields">
+        <mat-label>Enter First Name</mat-label>
+        <input formControlName="firstName" type="text" matInput>
+      </mat-form-field>
 
-              <!-- email -->
-              <div>
-                <mat-form-field class="email-full-width">
-                    <mat-label>Enter Email</mat-label>
-                    <input formControlName="email" type="email" placeholder="Ex. pat@example.com" matInput>
-                  </mat-form-field>
-              </div>
+      <!-- last name -->
+      <mat-form-field class="fields">
+        <mat-label>Enter Last Name</mat-label>
+        <input formControlName="lastName" type="text" matInput>
+      </mat-form-field>
 
-              <!-- password -->
-              <mat-form-field class="fields" appearance="fill">
-              <mat-label>Enter Password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-              <button mat-icon-button matSuffix (click)="toggleVisibility()">
-                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-              </button>
-            </mat-form-field>
+      <!-- email -->
+      <div>
+        <mat-form-field class="email-full-width">
+          <mat-label>Enter Email</mat-label>
+          <input formControlName="email" type="email" placeholder="Ex. pat@example.com" matInput>
+        </mat-form-field>
+      </div>
 
-              <!-- confirm password -->
-              <mat-form-field class="fields" appearance="fill">
-                <mat-label>Confirm Password</mat-label>
-                <input matInput [type]="confirmHide ? 'password' : 'text'" formControlName="confirmPassword">
-                <button mat-icon-button matSuffix (click)="toggleVisibilityConfirm()">
-                  <mat-icon>{{ confirmHide ? 'visibility_off' : 'visibility' }}</mat-icon>
-                </button>
-              </mat-form-field>
- 
-              <!-- password missmatch -->
+      <!-- password -->
+      <mat-form-field class="fields" appearance="fill">
+        <mat-label>Enter Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="toggleVisibility()">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
 
-              <div class="text-danger" *ngIf="registerData.hasError('passwordMismatch') && registerData.get('confirmPassword')?.touched">
-                Passwords do not match.
-              </div>
+      <!-- confirm password -->
+      <mat-form-field class="fields" appearance="fill">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput [type]="confirmHide ? 'password' : 'text'" formControlName="confirmPassword">
+        <button mat-icon-button matSuffix (click)="toggleVisibilityConfirm()">
+          <mat-icon>{{ confirmHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
 
-              <!-- success message -->
+      <!-- password missmatch -->
 
-              <div *ngIf="registerSuccessMessage" class="text-success ">
-                Registration Successfull 
-              </div>
+      <div class="text-danger"
+        *ngIf="registerData.hasError('passwordMismatch') && registerData.get('confirmPassword')?.touched">
+        Passwords do not match.
+      </div>
 
-              <!-- failed message -->
-          
-             
-              <div *ngIf="registrationFailedMessage" class="text-danger">
-                Registration Failed
-              </div>
+      <!-- success message -->
 
-              <!-- network error -->
+      <div *ngIf="registerSuccessMessage" class="text-success ">
+        Registration Successfull
+      </div>
 
-              <div class="text-danger" *ngIf="networkError">
-              Please check your connection and try again.
-              </div>
+      <!-- failed message -->
 
-              <!-- user already exists -->
 
-              <div class="text-danger" *ngIf="userAlreadyExist">
-                Email already exists Please use a different email address.
-                </div>
+      <div *ngIf="registrationFailedMessage" class="text-danger">
+        Registration Failed
+      </div>
 
-           <!-- button -->
-        <div class="Createbutton">
-            <div class="d-grid ">
-                 <button [disabled]="!registerData.valid || buttonDisable" class="mb-3 mt-4" type="submit" mat-raised-button color="primary">Create Account</button>
-                 
-            </div>
+      <!-- network error -->
+
+      <div class="text-danger" *ngIf="networkError">
+        Please check your connection and try again.
+      </div>
+
+      <!-- user already exists -->
+
+      <div class="text-danger" *ngIf="userAlreadyExist">
+        Email already exists Please use a different email address.
+      </div>
+
+      <!-- button -->
+      <div class="Createbutton">
+        <div class="d-grid ">
+          <button [disabled]="buttonDisable" class="mb-3 mt-4" type="submit" mat-raised-button color="primary">Create
+            Account <i *ngIf="spinnerVisible" class="fa-solid fa-spinner fa-spin"></i></button>
+
         </div>
+      </div>
 
-          <!-- login link -->
-          <div class="haveAnAccount"> <a class="decoration" routerLink="" href="auth/login">Have an account? Go to login</a></div>
-       </form>
-    </div>
-    <!-- <div class="childs"></div> -->
+      <!-- login link -->
+      <div class="haveAnAccount"> <a class="decoration" routerLink="" href="auth/login">Have an account? Go to login</a>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="childs"></div> -->
 </div>
